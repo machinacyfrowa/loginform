@@ -1,0 +1,29 @@
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    div#loginForm {
+        width: 40vw;
+        /*height: 40vh;*/
+        margin: 30vh 30vw 0;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    div#loginForm > * {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    div#loginForm > label {
+        font-size: small;
+        margin-bottom: 0;
+    }
+</style>
+<div id="loginForm">
+    <label for="emailInput">E-mail:</label>
+    <input type="email" name="email" id="emailInput">
+    <label for="passwordInput">Hasło:</label>
+    <input type="password" name="password" id="passwordInput">
+    <input type="submit" value="Zaloguj">
+</div>
