@@ -46,5 +46,6 @@ class User {
             return false;
         }
     }
+
 }
 ?>
