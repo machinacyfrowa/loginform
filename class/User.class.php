@@ -11,7 +11,7 @@ class User {
     public function __construct(string $login, string $password)
     {
         $this->login = $login;
-        $this->password_hash = $password;
+        $this->password = $password;
         // referencing global DB connection
         global $db;
         $this->db = &$db;
@@ -40,6 +40,17 @@ class User {
         
     }
     public function register() {
-        
+        $query = "INSERT INTO user VALUES (NULL, ?, ?, ?, ?)";
+        $preparedQuery = $this->db->prepare($query);
+        $passwordHash = password_hash($this->password, PASSWORD_ARGON2I);
+        if(!isset($this->firstName))
+            $this->firstName = "";
+        if(!isset($this->lastName))
+            $this->lastName = "";
+        $preparedQuery->bind_param('ssss', $this->login, 
+                                            $passwordHash,
+                                            $this->firstName, 
+                                            $this->lastName);
+        $preparedQuery->execute();
     }
 }
