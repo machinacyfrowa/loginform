@@ -15,6 +15,8 @@
             $db = new mysqli('localhost', 'root', '', 'loginForm');
             require('./../class/User.class.php');
             $user = new User($_REQUEST['login'], $_REQUEST['password']);
+            $user->setFirstName($_REQUEST['firstName']);
+            $user->setLastName($_REQUEST['lastName']);
             $user->register();
            
         }
@@ -38,9 +40,9 @@
             <label for="passwordID">Hasło:</label><br>
             <input type="password" name="password" id="passwordID"><br>
             <label for="firstNameID">Imię:</label><br>
-            <input type="password" name="firstName" id="firstNameID"><br>
+            <input type="text" name="firstName" id="firstNameID"><br>
             <label for="lastNameID">Nazwisko:</label><br>
-            <input type="lastName" name="lastName" id="lastNameID"><br>
+            <input type="text" name="lastName" id="lastNameID"><br>
             <input type="submit" value="Zarejestruj">
         </form>
     </div>
