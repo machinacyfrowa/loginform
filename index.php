@@ -101,12 +101,34 @@ Route::add('/profile', function() {
 Route::add('/profile', function() {
     global $twig;
     if(isset($_REQUEST['firstName']) && isset($_REQUEST['lastName'])) {
+        //formularz zmiany imienia i nazwiska
         $user = $_SESSION['user'];
         $user->setFirstName($_REQUEST['firstName']);
         $user->setLastName($_REQUEST['lastName']);
         $user->save();
         $twig->display('message.html.twig', 
                                 ['message' => "Zapisano zmiany w profilu"]);
+    }
+    if(isset($_REQUEST['password']) && isset($_REQUEST['passwordRepeat'])) {
+        //formularz zmiany hasła
+        $password = $_REQUEST['password'];
+        $passwordRepeat = $_REQUEST['passwordRepeat'];
+        if($password == $passwordRepeat) {
+            //hasła zgodne
+            $user = $_SESSION['user'];
+            if($user->changePassword($password)) {
+                $twig->display('message.html.twig', 
+                    ['message' => "Hasło zostało zmienione"]);
+            } else {
+                $twig->display('message.html.twig', 
+                    ['message' => "Nastąpił błąd!"]);
+            }
+        } else {
+            //hasła niezgodne
+            $twig->display('message.html.twig', 
+            ['message' => "Podane hasła nie są zgodne"]);
+        }
+        
     }
 }, "post");
 
